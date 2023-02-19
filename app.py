@@ -19,27 +19,11 @@ with open('data/data.jsonl.pickle', 'rb') as f:
 primer_elemento = data[0]
 
 df= pd.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "Danceability", "Arousal", "Valence"])
-# Accede a las claves y valores del diccionario
+
 for filename, d in primer_elemento.items():
-    #st.write(filename)
-    #st.write(d)
     df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
    
 st.dataframe(df)
-nombres_columnas = valor.keys()
-
-for diccionario in lista_diccionarios:
-    claves = diccionario.keys()
-    valores = diccionario.values()
-
-df = pd.DataFrame(data)
-
-
-# Convertir a DataFrame
-audio_analysis = pd.DataFrame(data)
-
-# Obtener las columnas
-audio_analysis_styles = audio_analysis.columns
 
 #st.dataframe(audio_analysis)
 
