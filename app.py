@@ -78,7 +78,6 @@ df['Arousal'] = pd.to_numeric(df['Arousal'], errors='coerce')
 df['Valence'] = pd.to_numeric(df['Valence'], errors='coerce')
 
 max_tracks = st.number_input('Maximum number of tracks (0 for all):', value=0)
-#style_rank = st.multiselect('Rank by style activations (multiplies activations for selected styles):', audio_analysis_styles, [])
 shuffle = st.checkbox('Random shuffle')
 
 
@@ -110,19 +109,7 @@ if st.button("RUN"):
             result = result.loc[result[style] >= style_select_range[0]]
         st.write(result)
         mp3s = result.index
-"""
-    if style_rank:
-        audio_analysis_query = audio_analysis.loc[mp3s][style_rank]
-        audio_analysis_query['RANK'] = audio_analysis_query[style_rank[0]]
-        for style in style_rank[1:]:
-            audio_analysis_query['RANK'] *= audio_analysis_query[style]
-        ranked = audio_analysis_query.sort_values(['RANK'], ascending=[False])
-        ranked = ranked[['RANK'] + style_rank]
-        mp3s = list(ranked.index)
 
-        st.write('Applied ranking by audio style predictions.')
-        st.write(ranked)
-"""
     if max_tracks:
         mp3s = mp3s[:max_tracks]
         st.write('Using top', len(mp3s), 'tracks from the results.')
