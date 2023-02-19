@@ -89,10 +89,11 @@ if st.button("RUN"):
     st.write('resulttempo',result)
     result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
     st.write('resultdance',result)
-    if instrument:
-        result = result.loc[result["Instrumental"] == 1]
-    else:
-        result = result.loc[result["Instrumental"] == 0]
+    result = result.loc[result["Instrumental"] == instrument]
+    #if instrument:
+       # result = result.loc[result["Instrumental"] == 1]
+    #else:
+        #result = result.loc[result["Instrumental"] == 0]
     st.write('resultinstrumental',result)
     result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
     st.write('result-arousal',result)
