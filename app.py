@@ -22,7 +22,7 @@ primer_elemento = data[0]
 df= pd.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "Danceability", "Arousal", "Valence"])
 
 for filename, d in primer_elemento.items():
-    df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
+    df.loc[len(df.index)] = [filename, int(d['Tempo']), d['Music style'], d['Instrumental'], int(d['Danceability']), int(d['Arousal']), int(d['Valence'])]
    
 audio_analysis_styles = df['Music style'].unique()
 #st.write(audio_analysis_styles)
