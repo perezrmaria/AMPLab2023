@@ -143,18 +143,15 @@ if st.button("RUN"):
       st.write(parte_final)
       tune_names_local.append(parte_final)
     
-    st.write('tune_names',tune_names)
-    st.write('tune_names_local',tune_names_local)
-    st.write('mp3s',mp3s)
     # Store the M3U8 playlist.
     with open(m3u_filepaths_file, 'w') as f:
         # Modify relative mp3 paths to make them accessible from the playlist folder.
-        mp3_paths = [os.path.join('..', mp3) for mp3 in tune_names]
+        mp3_paths = [os.path.join('..', mp3) for mp3 in tune_names_local]
         st.write('mp3_paths',mp3_paths)
         f.write('\n'.join(mp3_paths))
         st.write(f'Stored M3U playlist (local filepaths) to `{m3u_filepaths_file}`.')
 
     st.write('Audio previews for the first 10 results:')
-    for mp3 in mp3s[:10]:
+    for mp3 in tune_names_local[:10]:
         st.audio(mp3, format="audio/mp3", start_time=0)
 
