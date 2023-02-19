@@ -71,10 +71,12 @@ st.write("🐢 Arousal value is...", arousal)
 valence = st.slider('Choose the valence:', 1,9, (1,9))
 st.write("🥹 Valence value is...", valence)
 
+df['Tempo'] = pd.to_numeric(df['Tempo'], errors='coerce')
+
 
 st.write('## 🔊 Results')
 st.write(df.loc[0,'Tempo'], type(df.loc[0,'Tempo']), tempo[0], type(tempo[0]))
-result=df.loc[(int(df['Tempo']) >= tempo[0]) & (int(df['Tempo']) <= tempo[1])]
+result=df.loc[(df['Tempo'] >= tempo[0]) & (df['Tempo'] <= tempo[1])]
 result=result.loc[(int(result['Danceability']) >= danceability[0]) & (int(result['Danceability']) <= danceability[1])]
 if instrument:
     result = result.loc[result["Instrumental"] == 1]
