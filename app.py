@@ -15,7 +15,7 @@ def load_essentia_analysis():
 # Leer archivo .pickle
 with open('data/data.jsonl.pickle', 'rb') as f:
     data = pickle.load(f)
-st.write(type.data)  
+st.write(type(data))  
 #for num in data:
 #    st.write(num)
     
