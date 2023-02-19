@@ -88,8 +88,8 @@ else:
 result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
 result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
 
-if style_select:
-    result = result.loc[result["style"].isin(style_select)]
+#if style_select:
+    #result = result.loc[result["style"].isin(style_select)]
 #df = result
 #mp3s = list(audio_analysis.index)
 
