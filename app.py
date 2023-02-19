@@ -15,7 +15,7 @@ def load_essentia_analysis():
 st.write('# Audio analysis playlists example')
 st.write(f'Using analysis data from `{ESSENTIA_ANALYSIS_PATH}`.')
 audio_analysis = load_essentia_analysis()
-audio_analysis_styles = audio_analysis.columns
+audio_analysis_styles = audio_analysis.columns[1]
 st.write('Loaded audio analysis for', len(audio_analysis), 'tracks.')
 
 st.write('## ⌛️ Tempo')
