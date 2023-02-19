@@ -86,7 +86,7 @@ if instrument:
 else:
     result = result.loc[result["Instrumental"] == 0]
 result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
-result = result.loc[result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
+result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
 ##if vi_checkbox:
   #  result = result.loc[result["Instrumental"] == "Voice"]
 #else:
