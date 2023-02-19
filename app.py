@@ -24,7 +24,8 @@ df= pd.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "D
 for filename, d in primer_elemento.items():
     df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
    
-st.write(df['Music style'].unique)
+audio_analysis_styles = df['Music style'].unique
+st.write(audio_analysis_styles)
 
 #st.dataframe(audio_analysis)
 
@@ -66,40 +67,3 @@ st.write("🥹 Valence value is...", valence)
 
 
 
-if st.button("RUN"):
-    st.write('## 🔊 Results')
-    mp3s = list(df.index)
-
-    if style_select:
-        audio_analysis_query = audio_analysis.loc[mp3s][style_select]
-
-        #for style in style_select:
-        #    fig, ax = plt.subplots()
-        #    ax.hist(audio_analysis_query[style], bins=100)
-        #    st.pyplot(fig)
-
-        result = audio_analysis_query
-        for style in style_select:
-            result = result.loc[result[style] >= style_select_range[0]]
-        st.write(result)
-        mp3s = result.index
-
-    if style_rank:
-        audio_analysis_query = audio_analysis.loc[mp3s][style_rank]
-        audio_analysis_query['RANK'] = audio_analysis_query[style_rank[0]]
-        for style in style_rank[1:]:
-            audio_analysis_query['RANK'] *= audio_analysis_query[style]
-        ranked = audio_analysis_query.sort_values(['RANK'], ascending=[False])
-        ranked = ranked[['RANK'] + style_rank]
-        mp3s = list(ranked.index)
-
-        st.write('Applied ranking by audio style predictions.')
-        st.write(ranked)
-
-    if max_tracks:
-        mp3s = mp3s[:max_tracks]
-        st.write('Using top', len(mp3s), 'tracks from the results.')
-
-    if shuffle:
-        random.shuffle(mp3s)
-        st.write('Applied random shuffle.')
