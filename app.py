@@ -77,40 +77,68 @@ df['Danceability'] = pd.to_numeric(df['Danceability'], errors='coerce')
 df['Arousal'] = pd.to_numeric(df['Arousal'], errors='coerce')
 df['Valence'] = pd.to_numeric(df['Valence'], errors='coerce')
 
-st.write('## 🔊 Results')
-st.write(df.loc[0,'Tempo'], type(df.loc[0,'Tempo']), tempo[0], type(tempo[0]))
-result=df.loc[(df['Tempo'] >= tempo[0]) & (df['Tempo'] <= tempo[1])]
-result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
-if instrument:
-    result = result.loc[result["Instrumental"] == 1]
-else:
-    result = result.loc[result["Instrumental"] == 0]
-result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
-result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
-
-#if style_select:
-    #result = result.loc[result["style"].isin(style_select)]
-#df = result
-#mp3s = list(audio_analysis.index)
+max_tracks = st.number_input('Maximum number of tracks (0 for all):', value=0)
+style_rank = st.multiselect('Rank by style activations (multiplies activations for selected styles):', audio_analysis_styles, [])
+shuffle = st.checkbox('Random shuffle')
 
 
-audio_analysis = result
-mp3s = list(audio_analysis.index)
-if max_tracks:
-    mp3s = mp3s[:max_tracks]
-    st.write('Using top', len(mp3s), 'tracks from the results.')
+if st.button("RUN"):
+    st.write('## 🔊 Results')
+    #st.write(df.loc[0,'Tempo'], type(df.loc[0,'Tempo']), tempo[0], type(tempo[0]))
+    result=df.loc[(df['Tempo'] >= tempo[0]) & (df['Tempo'] <= tempo[1])]
+    result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
+    if instrument:
+        result = result.loc[result["Instrumental"] == 1]
+    else:
+        result = result.loc[result["Instrumental"] == 0]
+    result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
+    result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
 
-if shuffle:
-    random.shuffle(mp3s)
-    st.write('Applied random shuffle.')
+    audio_analysis = result
+    mp3s = list(audio_analysis.index)
 
-# Store the M3U8 playlist.
-with open(m3u_filepaths_file, 'w') as f:
-    # Modify relative mp3 paths to make them accessible from the playlist folder.
-    mp3_paths = [os.path.join('..', mp3) for mp3 in mp3s]
-    f.write('\n'.join(mp3_paths))
-    st.write(f'Stored M3U playlist (local filepaths) to `{m3u_filepaths_file}`.')
+    if style_select:
+        audio_analysis_query = audio_analysis.loc[mp3s][style_select]
 
-st.write('Audio previews for the first 10 results:')
-for mp3 in mp3s[:10]:
-    st.audio(mp3, format="audio/mp3", start_time=0)
+        #for style in style_select:
+        #    fig, ax = plt.subplots()
+        #    ax.hist(audio_analysis_query[style], bins=100)
+        #    st.pyplot(fig)
+
+        result = audio_analysis_query
+        for style in style_select:
+            result = result.loc[result[style] >= style_select_range[0]]
+        st.write(result)
+        mp3s = result.index
+
+    if style_rank:
+        audio_analysis_query = audio_analysis.loc[mp3s][style_rank]
+        audio_analysis_query['RANK'] = audio_analysis_query[style_rank[0]]
+        for style in style_rank[1:]:
+            audio_analysis_query['RANK'] *= audio_analysis_query[style]
+        ranked = audio_analysis_query.sort_values(['RANK'], ascending=[False])
+        ranked = ranked[['RANK'] + style_rank]
+        mp3s = list(ranked.index)
+
+        st.write('Applied ranking by audio style predictions.')
+        st.write(ranked)
+
+    if max_tracks:
+        mp3s = mp3s[:max_tracks]
+        st.write('Using top', len(mp3s), 'tracks from the results.')
+
+    if shuffle:
+        random.shuffle(mp3s)
+        st.write('Applied random shuffle.')
+
+    # Store the M3U8 playlist.
+    with open(m3u_filepaths_file, 'w') as f:
+        # Modify relative mp3 paths to make them accessible from the playlist folder.
+        mp3_paths = [os.path.join('..', mp3) for mp3 in mp3s]
+        f.write('\n'.join(mp3_paths))
+        st.write(f'Stored M3U playlist (local filepaths) to `{m3u_filepaths_file}`.')
+
+    st.write('Audio previews for the first 10 results:')
+    for mp3 in mp3s[:10]:
+        st.audio(mp3, format="audio/mp3", start_time=0)
+
