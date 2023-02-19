@@ -23,7 +23,7 @@ df= pd.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "D
 for filename, d in primer_elemento.items():
     df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
    
-st.dataframe(df)
+#st.dataframe(df)
 
 #st.dataframe(audio_analysis)
 
