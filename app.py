@@ -136,7 +136,7 @@ if st.button("RUN"):
     #parts = tune_names.split('/')
     #last_four_parts = parts[-4:]
     #tune_names_local = os.path.join(*last_four_parts)
-    
+    tune_names_local=[]
     for filepath in tune_names:
       partes = filepath.split("/")
       parte_final = "/".join(partes[-4:])
