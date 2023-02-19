@@ -22,11 +22,12 @@ st.write(type(data))
 #songs = data.keys()
 #values = data.values()
 
-data_list = []
-for key, value in data.items():
-    value['song_id'] = key
-    data_list.append(value)
-df = pd.DataFrame(data_list)
+#data_list = []
+#for key, value in data.items():
+#    value['song_id'] = key
+#    data_list.append(value)
+#df = pd.DataFrame(data_list)
+df = pd.DataFrame(data)
 st.dataframe(df)
 
 # Convertir a DataFrame
