@@ -22,7 +22,7 @@ primer_elemento = data[0]
 df= pd.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "Danceability", "Arousal", "Valence"])
 
 for filename, d in primer_elemento.items():
-    df.loc[len(df.index)] = [filename, int(d['Tempo']), d['Music style'], d['Instrumental'], int(d['Danceability']), int(d['Arousal']), int(d['Valence'])]
+    df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
    
 audio_analysis_styles = df['Music style'].unique()
 #st.write(audio_analysis_styles)
@@ -74,19 +74,19 @@ st.write("🥹 Valence value is...", valence)
 
 st.write('## 🔊 Results')
 st.write(df.loc[0,'Tempo'], type(df.loc[0,'Tempo']), tempo[0], type(tempo[0]))
-result=df.loc[(df['Tempo'] >= tempo[0]) & (df['Tempo'] <= tempo[1])]
-result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
+result=df.loc[(int(df['Tempo']) >= tempo[0]) & (int(df['Tempo']) <= tempo[1])]
+result=result.loc[(int(result['Danceability']) >= danceability[0]) & (int(result['Danceability']) <= danceability[1])]
 if instrument:
     result = result.loc[result["Instrumental"] == 1]
 else:
     result = result.loc[result["Instrumental"] == 0]
-result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
-result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
-if vi_checkbox:
-    result = result.loc[result["Instrumental"] == "Voice"]
-else:
-    result = result.loc[result["Instrumental"] == "Instrumental"]
+result = result.loc[(int(result["Arousal"]) >= arousal[0]) & (int(result["Arousal"]) <= arousal[1])]
+result = result.loc[(int(result["Valence"]) >= valence[0]) & (int(result["Valence"]) <= valence[1])]
+##if vi_checkbox:
+  #  result = result.loc[result["Instrumental"] == "Voice"]
+#else:
+    #result = result.loc[result["Instrumental"] == "Instrumental"]
 #if style_select:
     #result = result.loc[result["style"].isin(style_select)]
-df = result
+#df = result
 #mp3s = list(audio_analysis.index)
