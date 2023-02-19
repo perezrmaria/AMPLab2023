@@ -45,7 +45,7 @@ style_select = st.multiselect('Select by style activations:', audio_analysis_sty
     #style_select_range = st.slider(f'Select tracks with {style_select_str}', 1, len(styles), (1, len(styles)))
 
 if style_select:
-    st.write(audio_analysis_styles[style_select].describe())
+    st.write('Audio with the following style(s):', audio_analysis_styles[style_select])
 else:
     st.write("No style selected")
 
