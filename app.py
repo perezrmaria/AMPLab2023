@@ -27,7 +27,7 @@ for key, value in data.items():
     value['song_id'] = key
     data_list.append(value)
 df = pd.DataFrame(data_list)
-st.dataframe(df
+st.dataframe(df)
 
 # Convertir a DataFrame
 audio_analysis = pd.DataFrame(data)
