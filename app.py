@@ -92,3 +92,25 @@ if style_select:
     result = result.loc[result["style"].isin(style_select)]
 #df = result
 #mp3s = list(audio_analysis.index)
+
+
+audio_analysis = result
+mp3s = list(audio_analysis.index)
+if max_tracks:
+    mp3s = mp3s[:max_tracks]
+    st.write('Using top', len(mp3s), 'tracks from the results.')
+
+if shuffle:
+    random.shuffle(mp3s)
+    st.write('Applied random shuffle.')
+
+# Store the M3U8 playlist.
+with open(m3u_filepaths_file, 'w') as f:
+    # Modify relative mp3 paths to make them accessible from the playlist folder.
+    mp3_paths = [os.path.join('..', mp3) for mp3 in mp3s]
+    f.write('\n'.join(mp3_paths))
+    st.write(f'Stored M3U playlist (local filepaths) to `{m3u_filepaths_file}`.')
+
+st.write('Audio previews for the first 10 results:')
+for mp3 in mp3s[:10]:
+    st.audio(mp3, format="audio/mp3", start_time=0)
