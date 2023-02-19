@@ -97,9 +97,9 @@ if st.button("RUN"):
     st.write('result_valence',result)
     #result = result.loc[result["Instrumental"] == instrument]
     if instrument:
-        result = result.loc[result["Instrumental"] == 1]
+        result = result.loc[result["Instrumental"] == "1"]
     else:
-        result = result.loc[result["Instrumental"] == 0]
+        result = result.loc[result["Instrumental"] == "0"]
     st.write('resultinstrumental',result)
    
     audio_analysis = result
