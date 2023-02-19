@@ -89,17 +89,19 @@ if st.button("RUN"):
     st.write('resulttempo',result)
     result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
     st.write('resultdance',result)
-    result = result.loc[result["Instrumental"] == instrument]
-    #if instrument:
-       # result = result.loc[result["Instrumental"] == 1]
-    #else:
-        #result = result.loc[result["Instrumental"] == 0]
-    st.write('resultinstrumental',result)
+    st.write('instrument',instrument)
+     
     result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
     st.write('result-arousal',result)
     result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
     st.write('result_valence',result)
-
+    #result = result.loc[result["Instrumental"] == instrument]
+    if instrument:
+        result = result.loc[result["Instrumental"] == 1]
+    else:
+        result = result.loc[result["Instrumental"] == 0]
+    st.write('resultinstrumental',result)
+   
     audio_analysis = result
     st.write('REsult: ',audio_analysis)
     mp3s = list(audio_analysis.index)
