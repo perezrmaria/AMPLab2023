@@ -128,11 +128,14 @@ if st.button("RUN"):
 
         #random.shuffle(mp3s)
         st.write('Applied random shuffle.')
+    
 
+    st.write('mp3s',mp3s)
     # Store the M3U8 playlist.
     with open(m3u_filepaths_file, 'w') as f:
         # Modify relative mp3 paths to make them accessible from the playlist folder.
         mp3_paths = [os.path.join('..', mp3) for mp3 in mp3s]
+        
         f.write('\n'.join(mp3_paths))
         st.write(f'Stored M3U playlist (local filepaths) to `{m3u_filepaths_file}`.')
 
