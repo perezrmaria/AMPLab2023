@@ -133,7 +133,11 @@ if st.button("RUN"):
         st.write('Using top', len(mp3s), 'tracks from the results.')
 
     if shuffle:
-        random.shuffle(mp3s)
+        mp3s_list = mp3s.tolist()
+        random.shuffle(mp3s_list)
+        mp3s = pd.Index(mp3s_list)
+
+        #random.shuffle(mp3s)
         st.write('Applied random shuffle.')
 
     # Store the M3U8 playlist.
