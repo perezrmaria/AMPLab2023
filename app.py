@@ -49,10 +49,8 @@ if style_select:
 else:
     st.write("No style selected")
 
-
-
 st.write('## ⌛️ Tempo')
-tempo = st.slider('Choose a tempo', 60, 180, 25)
+tempo = st.slider('Choose a tempo', 60, 180, (60,180))
 st.write("The following tempo is selected:", tempo)
 
 st.write('## 🪗 Type of song: instrumental or vocal tune')
@@ -64,14 +62,30 @@ else:
     st.write('Vocal song is selected! 🎤')
     
 st.write('## 🩰 Danceability')
-danceability = st.slider('Choose how danceable you want the song to be:', 0, 3)
+danceability = st.slider('Choose how danceable you want the song to be:', 0, 3, (0,3))
 st.write("Danceability value is...💃🏽", danceability)
 
 st.write('## 🤨🤩 Arousal and valence')
-arousal = st.slider('Choose the arousal:', 1,9)
+arousal = st.slider('Choose the arousal:', 1,9, (1,9))
 st.write("🐢 Arousal value is...", arousal)
-valence = st.slider('Choose the valence:', 1,9)
+valence = st.slider('Choose the valence:', 1,9, (1,9))
 st.write("🥹 Valence value is...", valence)
 
 
-
+st.write('## 🔊 Results')
+    result=df.loc[(df['Tempo'] >= tempo_select_range[0]) & (df['tempo'] <= tempo[1])]
+    result=result.loc[(result['Danceability'] >= danceability[0]) & (result['danceability'] <= danceability[1])]
+    if instrument:
+        result = result.loc[result["Instrumental"] == 1]
+    else:
+        result = result.loc[result["Instrumental"] == 0]
+    result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
+    result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
+    if vi_checkbox:
+        result = result.loc[result["Instrumental"] == "Voice"]
+    else:
+        result = result.loc[result["Instrumental"] == "Instrumental"]
+    #if style_select:
+        #result = result.loc[result["style"].isin(style_select)]
+    df = result
+    #mp3s = list(audio_analysis.index)
