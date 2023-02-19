@@ -20,8 +20,8 @@ primer_elemento = data[0]
 
 # Accede a las claves y valores del diccionario
 for clave, valor in primer_elemento.items():
-    print(clave)
-    print(valor)
+    st.write(clave)
+    st.write(valor)
 #for num in data:
 #    st.write(num)
     
@@ -44,7 +44,7 @@ audio_analysis = pd.DataFrame(data)
 # Obtener las columnas
 audio_analysis_styles = audio_analysis.columns
 
-st.dataframe(audio_analysis)
+#st.dataframe(audio_analysis)
 
 st.write('# Audio analysis playlists example')
 st.write(f'Using analysis data from `{ESSENTIA_ANALYSIS_PATH}`.')
