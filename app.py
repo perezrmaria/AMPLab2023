@@ -86,24 +86,17 @@ if st.button("RUN"):
     st.write('## 🔊 Results')
     #st.write(df.loc[0,'Tempo'], type(df.loc[0,'Tempo']), tempo[0], type(tempo[0]))
     result=df.loc[(df['Tempo'] >= tempo[0]) & (df['Tempo'] <= tempo[1])]
-    st.write('resulttempo',result)
     result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
-    st.write('resultdance',result)
-    st.write('instrument',instrument)
-     
     result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
-    st.write('result-arousal',result)
     result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
-    st.write('result_valence',result)
     #result = result.loc[result["Instrumental"] == instrument]
     if instrument:
         result = result.loc[result["Instrumental"] == "1"]
     else:
         result = result.loc[result["Instrumental"] == "0"]
-    st.write('resultinstrumental',result)
    
     audio_analysis = result
-    st.write('REsult: ',audio_analysis)
+    st.write('Result: ', audio_analysis)
     mp3s = list(audio_analysis.index)
         
     if style_select:
@@ -113,10 +106,6 @@ if st.button("RUN"):
             styles.append(style)
         st.write('This is styles : ',styles)
         audio_analysis_query = audio_analysis.loc[audio_analysis["Music style"].isin(style_select)]
-        #st.write(audio_analysis["Music style"].loc[0,:])
-        st.write(audio_analysis["Music style"].isin(style_select))
-        st.write('Style select',style_select)
-        st.write('Audio analysis query',audio_analysis_query)
         #for style in style_select:
         #    fig, ax = plt.subplots()
         #    ax.hist(audio_analysis_query[style], bins=100)
