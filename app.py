@@ -40,7 +40,7 @@ if style_select:
     st.write(audio_analysis[style_select].describe())
 
     style_select_str = ', '.join(style_select)
-    style_select_range = st.slider(f'Select tracks with `{style_select_str})
+    style_select_range = st.slider(f'Select tracks with '{style_select_str})
 
 
 st.write('## ⌛️ Tempo')
