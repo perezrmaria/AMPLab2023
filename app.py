@@ -95,21 +95,19 @@ if st.button("RUN"):
 
     audio_analysis = result
     mp3s = list(audio_analysis.index)
-    
-    if not mp3s:
-        mp3s = audio_analysis.index
         
     if style_select:
-        audio_analysis_query = audio_analysis.loc[mp3s][style_select]
-
+        #audio_analysis_query = audio_analysis.loc[mp3s].isin(style_select)
+        audio_analysis_query = audio_analysis.loc[audio_analysis["Music style"].isin(style_select)]
+        st.write(audio_analysis_query)
         #for style in style_select:
         #    fig, ax = plt.subplots()
         #    ax.hist(audio_analysis_query[style], bins=100)
         #    st.pyplot(fig)
 
         result = audio_analysis_query
-        for style in style_select:
-            result = result.loc[result[style] >= style_select_range[0]]
+        #for style in style_select:
+            #result = result.loc[result[style] >= style_select_range[0]]
         st.write(result)
         mp3s = result.index
 
