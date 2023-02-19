@@ -1,7 +1,7 @@
 import os.path
 import random
 import streamlit as st
-import pandas
+import pandas as pd
 import pickle
 
 
@@ -19,6 +19,12 @@ with open('data/data.jsonl.pickle', 'rb') as f:
     audio_analysis = pickle.load(f)
 
 # Utilizar la variable audio_analysis
+audio_analysis_styles = audio_analysis.columns
+
+# Convertir a DataFrame
+audio_analysis = pd.DataFrame(data)
+
+# Obtener las columnas
 audio_analysis_styles = audio_analysis.columns
 
 
