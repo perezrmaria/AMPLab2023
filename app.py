@@ -73,19 +73,19 @@ st.write("🥹 Valence value is...", valence)
 
 
 st.write('## 🔊 Results')
-    result=df.loc[(df['Tempo'] >= tempo_select_range[0]) & (df['tempo'] <= tempo[1])]
-    result=result.loc[(result['Danceability'] >= danceability[0]) & (result['danceability'] <= danceability[1])]
-    if instrument:
-        result = result.loc[result["Instrumental"] == 1]
-    else:
-        result = result.loc[result["Instrumental"] == 0]
-    result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
-    result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
-    if vi_checkbox:
-        result = result.loc[result["Instrumental"] == "Voice"]
-    else:
-        result = result.loc[result["Instrumental"] == "Instrumental"]
-    #if style_select:
-        #result = result.loc[result["style"].isin(style_select)]
-    df = result
-    #mp3s = list(audio_analysis.index)
+result=df.loc[(df['Tempo'] >= tempo_select_range[0]) & (df['tempo'] <= tempo[1])]
+result=result.loc[(result['Danceability'] >= danceability[0]) & (result['danceability'] <= danceability[1])]
+if instrument:
+    result = result.loc[result["Instrumental"] == 1]
+else:
+    result = result.loc[result["Instrumental"] == 0]
+result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
+result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
+if vi_checkbox:
+    result = result.loc[result["Instrumental"] == "Voice"]
+else:
+    result = result.loc[result["Instrumental"] == "Instrumental"]
+#if style_select:
+    #result = result.loc[result["style"].isin(style_select)]
+df = result
+#mp3s = list(audio_analysis.index)
