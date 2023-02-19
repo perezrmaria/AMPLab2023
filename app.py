@@ -43,8 +43,8 @@ instrument = st.checkbox('🎙️ 🎻 Instrumental or vocal tune')
 
 if instrument:
     st.write('Instrumental song is selected!🎺')
-if not instrument:
-    st.erite('Vocal song is selected! 🎤')
+else:
+    st.write('Vocal song is selected! 🎤')
     
 st.write('## 🩰 Danceability')
 danceability = st.slider('Choose how danceable you want the song to be:', 0, 3)
