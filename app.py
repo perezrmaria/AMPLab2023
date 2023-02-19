@@ -25,7 +25,7 @@ for filename, d in primer_elemento.items():
     df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
    
 audio_analysis_styles = df['Music style'].unique()
-st.write(audio_analysis_styles)
+#st.write(audio_analysis_styles)
 
 #st.dataframe(audio_analysis)
 
@@ -37,7 +37,7 @@ st.write('Loaded audio analysis for', len(df), 'tracks.')
 style_select = st.multiselect('Select by style activations:', audio_analysis_styles)
 #if style_select:
     # Show the distribution of activation values for the selected styles.
-    st.write(audio_analysis[style_select].describe())
+    #st.write(audio_analysis[style_select].describe())
 
     #style_select_str = ', '.join(style_select)
     #style_select_range = st.slider(f'Select tracks with', `{style_select_str}`)
