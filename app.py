@@ -36,7 +36,7 @@ st.write(f'Using analysis data from `{path}`.')
 st.write('Loaded audio analysis for', len(df), 'tracks.')
 
 style_select = st.multiselect('Select by style activations:', audio_analysis_styles)
-st.write(type([0]))
+st.write(type(style_select[0]))
 #if style_select:
     # Show the distribution of activation values for the selected styles.
     #st.write(audio_analysis[style_select].describe())
