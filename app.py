@@ -135,7 +135,7 @@ if st.button("RUN"):
     
     parts = tune_names.split('/')
     last_four_parts = parts[-4:]
-    tune_names_local = os.path.join(last_four_parts)
+    tune_names_local = os.path.join(*last_four_parts)
     
     st.write('tune_names',tune_names)
     st.write('tune_names_local',tune_names_local)
