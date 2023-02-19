@@ -16,10 +16,10 @@ def load_essentia_analysis():
 
 # Leer archivo .pickle
 with open('data/data.jsonl.pickle', 'rb') as f:
-    audio_analysis = pickle.load(f)
+    data = pickle.load(f)
 
 # Utilizar la variable audio_analysis
-audio_analysis_styles = audio_analysis.columns
+#audio_analysis_styles = audio_analysis.columns
 
 # Convertir a DataFrame
 audio_analysis = pd.DataFrame(data)
