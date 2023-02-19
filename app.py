@@ -18,7 +18,7 @@ with open('data/data.jsonl.pickle', 'rb') as f:
 #st.write(data)
 primer_elemento = data[0]
 
-df.Dataframe(columns=["Filename", "Tempo", "Music style", "Instrumental", "Danceability", "Arousal", "Valence"])
+df.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "Danceability", "Arousal", "Valence"])
 # Accede a las claves y valores del diccionario
 for filename, d in primer_elemento.items():
     #st.write(filename)
