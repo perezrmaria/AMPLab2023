@@ -102,11 +102,11 @@ if st.button("RUN"):
         styles = []
         for style in style_select:
             styles.append(style)
-        st.write(styles)
+        st.write('This is styles : ',styles)
         audio_analysis_query = audio_analysis.loc[audio_analysis["Music style"].isin(style_select)]
         st.write(audio_analysis["Music style"].isin(style_select))
-        st.write(style_select)
-        st.write(audio_analysis_query)
+        st.write('Style select',style_select)
+        st.write('Audio analysis query',audio_analysis_query)
         #for style in style_select:
         #    fig, ax = plt.subplots()
         #    ax.hist(audio_analysis_query[style], bins=100)
