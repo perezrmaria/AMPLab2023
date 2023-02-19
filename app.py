@@ -39,8 +39,11 @@ if style_select:
     # Show the distribution of activation values for the selected styles.
     st.write(audio_analysis[style_select].describe())
 
-    style_select_str = ', '.join(style_select)
-    style_select_range = st.slider(f'Select tracks with', `{style_select_str}`)
+    #style_select_str = ', '.join(style_select)
+    #style_select_range = st.slider(f'Select tracks with', `{style_select_str}`)
+    style_select_str = ", ".join([f"'{style}'" for style in styles])
+    style_select_range = st.slider(f'Select tracks with {style_select_str}', 1, len(styles), (1, len(styles)))
+
 
 
 st.write('## ⌛️ Tempo')
