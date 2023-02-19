@@ -16,8 +16,18 @@ def load_essentia_analysis():
 with open('data/data.jsonl.pickle', 'rb') as f:
     data = pickle.load(f)
     
-for num in data:
-    st.write(num)
+#for num in data:
+#    st.write(num)
+    
+songs = data.keys()
+values = data.values()
+
+data_list = []
+for key, value in data.items():
+    value['song_id'] = key
+    data_list.append(value)
+df = pd.DataFrame(data_list)
+st.dataframe(df
 
 # Convertir a DataFrame
 audio_analysis = pd.DataFrame(data)
