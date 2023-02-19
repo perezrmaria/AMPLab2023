@@ -95,7 +95,10 @@ if st.button("RUN"):
 
     audio_analysis = result
     mp3s = list(audio_analysis.index)
-
+    
+    if not mp3s:
+        mp3s = audio_analysis.index
+        
     if style_select:
         audio_analysis_query = audio_analysis.loc[mp3s][style_select]
 
