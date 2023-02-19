@@ -140,14 +140,12 @@ if st.button("RUN"):
     for filepath in tune_names:
       partes = filepath.split("/")
       parte_final = "/".join(partes[-4:])
-      st.write(parte_final)
       tune_names_local.append(parte_final)
     
     # Store the M3U8 playlist.
     with open(m3u_filepaths_file, 'w') as f:
         # Modify relative mp3 paths to make them accessible from the playlist folder.
         mp3_paths = [os.path.join('..', mp3) for mp3 in tune_names_local]
-        st.write('mp3_paths',mp3_paths)
         f.write('\n'.join(mp3_paths))
         st.write(f'Stored M3U playlist (local filepaths) to `{m3u_filepaths_file}`.')
 
