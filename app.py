@@ -2,6 +2,7 @@ import os.path
 import random
 import streamlit as st
 import pandas
+import pickle
 
 
 m3u_filepaths_file = 'playlists/streamlit.m3u8'
@@ -12,10 +13,19 @@ def load_essentia_analysis():
     return pandas.read_pickle(ESSENTIA_ANALYSIS_PATH)
 
 
+
+# Leer archivo .pickle
+with open('data/data.jsonl.pickle', 'rb') as f:
+    audio_analysis = pickle.load(f)
+
+# Utilizar la variable audio_analysis
+audio_analysis_styles = audio_analysis.columns
+
+
 st.write('# Audio analysis playlists example')
 st.write(f'Using analysis data from `{ESSENTIA_ANALYSIS_PATH}`.')
-audio_analysis = load_essentia_analysis()
-audio_analysis_styles = audio_analysis.columns
+#audio_analysis = load_essentia_analysis()
+#audio_analysis_styles = audio_analysis.columns
 st.write('Loaded audio analysis for', len(audio_analysis), 'tracks.')
 
 st.write('## ⌛️ Tempo')
