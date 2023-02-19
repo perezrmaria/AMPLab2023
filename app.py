@@ -23,6 +23,7 @@ df= pd.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "D
 
 for filename, d in primer_elemento.items():
     df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
+st.dataframe(df)
    
 audio_analysis_styles = df['Music style'].unique()
 #st.write(audio_analysis_styles)
@@ -72,18 +73,20 @@ valence = st.slider('Choose the valence:', 1,9, (1,9))
 st.write("🥹 Valence value is...", valence)
 
 df['Tempo'] = pd.to_numeric(df['Tempo'], errors='coerce')
-
+df['Danceability'] = pd.to_numeric(df['Danceability'], errors='coerce')
+df['Arousal'] = pd.to_numeric(df['Arousal'], errors='coerce')
+df['Valence'] = pd.to_numeric(df['Valence'], errors='coerce')
 
 st.write('## 🔊 Results')
 st.write(df.loc[0,'Tempo'], type(df.loc[0,'Tempo']), tempo[0], type(tempo[0]))
 result=df.loc[(df['Tempo'] >= tempo[0]) & (df['Tempo'] <= tempo[1])]
-result=result.loc[(int(result['Danceability']) >= danceability[0]) & (int(result['Danceability']) <= danceability[1])]
+result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
 if instrument:
     result = result.loc[result["Instrumental"] == 1]
 else:
     result = result.loc[result["Instrumental"] == 0]
-result = result.loc[(int(result["Arousal"]) >= arousal[0]) & (int(result["Arousal"]) <= arousal[1])]
-result = result.loc[(int(result["Valence"]) >= valence[0]) & (int(result["Valence"]) <= valence[1])]
+result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
+result = result.loc[result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
 ##if vi_checkbox:
   #  result = result.loc[result["Instrumental"] == "Voice"]
 #else:
