@@ -31,7 +31,7 @@ st.write('# Audio analysis playlists example')
 st.write(f'Using analysis data from `{ESSENTIA_ANALYSIS_PATH}`.')
 #audio_analysis = load_essentia_analysis()
 #audio_analysis_styles = audio_analysis.columns
-st.write('Loaded audio analysis for', len(audio_analysis), 'tracks.')
+st.write('Loaded audio analysis for', len(df), 'tracks.')
 
 st.write('## ⌛️ Tempo')
 tempo = st.slider('Choose a tempo', 60, 180, 25)
