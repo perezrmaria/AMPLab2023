@@ -131,7 +131,9 @@ if st.button("RUN"):
      
     
     tune_names = df.iloc[mp3s]['Filename']
+    tune_names_local = os.path.join(*os.path.split(tune_names)[-4:])
     st.write('tune_names',tune_names)
+    st.write('tune_names_local',tune_names_local)
     st.write('mp3s',mp3s)
     # Store the M3U8 playlist.
     with open(m3u_filepaths_file, 'w') as f:
