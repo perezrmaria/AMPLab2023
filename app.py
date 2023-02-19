@@ -15,7 +15,7 @@ def load_essentia_analysis():
 # Leer archivo .pickle
 with open('data/data.jsonl.pickle', 'rb') as f:
     data = pickle.load(f)
-st.write(data)
+#st.write(data)
 primer_elemento = data[0]
 
 # Accede a las claves y valores del diccionario
@@ -35,8 +35,8 @@ for clave, valor in primer_elemento.items():
 #df = pd.DataFrame(data_list)
 df = pd.DataFrame(data)
 #st.dataframe(df)
-valores_diccionarios = df.apply(lambda x: [valor for valor in x.values()], axis=1)
-st.write(valores_diccionarios)
+#valores_diccionarios = df.apply(lambda x: [valor for valor in x.values()], axis=1)
+#st.write(valores_diccionarios)
 
 # Convertir a DataFrame
 audio_analysis = pd.DataFrame(data)
