@@ -23,7 +23,7 @@ df= pd.DataFrame(columns=["Filename", "Tempo", "Music style", "Instrumental", "D
 
 for filename, d in primer_elemento.items():
     df.loc[len(df.index)] = [filename, d['Tempo'], d['Music style'], d['Instrumental'], d['Danceability'], d['Arousal'], d['Valence']]
-st.dataframe(df)
+#st.dataframe(df)
    
 audio_analysis_styles = df['Music style'].unique()
 #st.write(audio_analysis_styles)
@@ -46,7 +46,7 @@ style_select = st.multiselect('Select by style activations:', audio_analysis_sty
     #style_select_range = st.slider(f'Select tracks with {style_select_str}', 1, len(styles), (1, len(styles)))
 
 if style_select:
-    st.write('Audio with the following style(s):', audio_analysis_styles[style_select])
+    st.write('Audio with the following style(s):', style_select)
 else:
     st.write("No style selected")
 
@@ -87,11 +87,8 @@ else:
     result = result.loc[result["Instrumental"] == 0]
 result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
 result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
-##if vi_checkbox:
-  #  result = result.loc[result["Instrumental"] == "Voice"]
-#else:
-    #result = result.loc[result["Instrumental"] == "Instrumental"]
-#if style_select:
-    #result = result.loc[result["style"].isin(style_select)]
+
+if style_select:
+    result = result.loc[result["style"].isin(style_select)]
 #df = result
 #mp3s = list(audio_analysis.index)
