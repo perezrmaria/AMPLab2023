@@ -15,12 +15,12 @@ def load_essentia_analysis():
 # Leer archivo .pickle
 with open('data/data.jsonl.pickle', 'rb') as f:
     data = pickle.load(f)
-    
+st.write(type.data)  
 #for num in data:
 #    st.write(num)
     
-songs = data.keys()
-values = data.values()
+#songs = data.keys()
+#values = data.values()
 
 data_list = []
 for key, value in data.items():
