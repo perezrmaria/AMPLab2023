@@ -86,13 +86,18 @@ if st.button("RUN"):
     st.write('## 🔊 Results')
     #st.write(df.loc[0,'Tempo'], type(df.loc[0,'Tempo']), tempo[0], type(tempo[0]))
     result=df.loc[(df['Tempo'] >= tempo[0]) & (df['Tempo'] <= tempo[1])]
+    st.write('resulttempo',result)
     result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
+    st.write('resultdance',result)
     if instrument:
         result = result.loc[result["Instrumental"] == 1]
     else:
         result = result.loc[result["Instrumental"] == 0]
+    st.write('resultinstrumental',result)
     result = result.loc[(result["Arousal"] >= arousal[0]) & (result["Arousal"] <= arousal[1])]
+    st.write('result-arousal',result)
     result = result.loc[(result["Valence"] >= valence[0]) & (result["Valence"] <= valence[1])]
+    st.write('result_valence',result)
 
     audio_analysis = result
     st.write('REsult: ',audio_analysis)
