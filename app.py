@@ -96,7 +96,6 @@ if st.button("RUN"):
         result = result.loc[result["Instrumental"] == "0"]
    
     audio_analysis = result
-    st.write('Result: ', audio_analysis)
     mp3s = list(audio_analysis.index)
         
     if style_select:
@@ -112,6 +111,7 @@ if st.button("RUN"):
         #    st.pyplot(fig)
 
         result = audio_analysis_query
+        st.write('Results:',result)
         #for style in style_select:
             #result = result.loc[result[style] >= style_select_range[0]]
         #st.write(result)
