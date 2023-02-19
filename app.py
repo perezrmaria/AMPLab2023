@@ -73,8 +73,8 @@ st.write("🥹 Valence value is...", valence)
 
 
 st.write('## 🔊 Results')
-result=df.loc[(df['Tempo'] >= tempo_select_range[0]) & (df['tempo'] <= tempo[1])]
-result=result.loc[(result['Danceability'] >= danceability[0]) & (result['danceability'] <= danceability[1])]
+result=df.loc[(df['Tempo'] >= tempo_select_range[0]) & (df['Tempo'] <= tempo[1])]
+result=result.loc[(result['Danceability'] >= danceability[0]) & (result['Danceability'] <= danceability[1])]
 if instrument:
     result = result.loc[result["Instrumental"] == 1]
 else:
