@@ -99,6 +99,8 @@ if st.button("RUN"):
     if style_select:
         #audio_analysis_query = audio_analysis.loc[mp3s].isin(style_select)
         audio_analysis_query = audio_analysis.loc[audio_analysis["Music style"].isin(style_select)]
+        st.write(audio_analysis["Music style"].isin(style_select)
+        st.write(style_select)
         st.write(audio_analysis_query)
         #for style in style_select:
         #    fig, ax = plt.subplots()
@@ -108,7 +110,7 @@ if st.button("RUN"):
         result = audio_analysis_query
         #for style in style_select:
             #result = result.loc[result[style] >= style_select_range[0]]
-        st.write(result)
+        #st.write(result)
         mp3s = result.index
 
     if max_tracks:
