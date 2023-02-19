@@ -105,7 +105,7 @@ if st.button("RUN"):
             styles.append(style)
         st.write('This is styles : ',styles)
         audio_analysis_query = audio_analysis.loc[audio_analysis["Music style"].isin(style_select)]
-        st.write(audio_analysis["Music style"].loc[0-:])
+        st.write(audio_analysis["Music style"].loc[0,:])
         st.write(audio_analysis["Music style"].isin(style_select))
         st.write('Style select',style_select)
         st.write('Audio analysis query',audio_analysis_query)
