@@ -133,9 +133,14 @@ if st.button("RUN"):
     tune_names = df.iloc[mp3s]['Filename']
     #tune_names_local = os.path.join(*os.path.split(tune_names)[-4:])
     
-    parts = tune_names.split('/')
-    last_four_parts = parts[-4:]
-    tune_names_local = os.path.join(*last_four_parts)
+    #parts = tune_names.split('/')
+    #last_four_parts = parts[-4:]
+    #tune_names_local = os.path.join(*last_four_parts)
+    
+    for filepath in tune_names:
+      partes = filepath.split("/")
+      parte_final = "/".join(partes[-4:])
+      tune_names_local.append(parte_final)
     
     st.write('tune_names',tune_names)
     st.write('tune_names_local',tune_names_local)
