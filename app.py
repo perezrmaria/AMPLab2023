@@ -140,7 +140,7 @@ if st.button("RUN"):
     for filepath in tune_names:
       partes = filepath.split("/")
       parte_final = "/".join(partes[-4:])
-      st.write(part_final)
+      st.write(parte_final)
       tune_names_local.append(parte_final)
     
     st.write('tune_names',tune_names)
