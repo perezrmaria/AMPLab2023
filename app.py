@@ -99,6 +99,10 @@ if st.button("RUN"):
         
     if style_select:
         #audio_analysis_query = audio_analysis.loc[mp3s].isin(style_select)
+        styles = []
+        for style in style_select:
+            styles.append(style)
+        st.write(styles)
         audio_analysis_query = audio_analysis.loc[audio_analysis["Music style"].isin(style_select)]
         st.write(audio_analysis["Music style"].isin(style_select))
         st.write(style_select)
