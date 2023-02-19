@@ -16,6 +16,12 @@ def load_essentia_analysis():
 with open('data/data.jsonl.pickle', 'rb') as f:
     data = pickle.load(f)
 st.write(data)
+primer_elemento = data[0]
+
+# Accede a las claves y valores del diccionario
+for clave, valor in primer_elemento.items():
+    print(clave)
+    print(valor)
 #for num in data:
 #    st.write(num)
     
