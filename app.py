@@ -28,7 +28,9 @@ st.write(type(data))
 #    data_list.append(value)
 #df = pd.DataFrame(data_list)
 df = pd.DataFrame(data)
-st.dataframe(df)
+#st.dataframe(df)
+valores_diccionarios = df.apply(lambda x: [valor for valor in x.values()], axis=1)
+st.write(valores_diccionarios)
 
 # Convertir a DataFrame
 audio_analysis = pd.DataFrame(data)
