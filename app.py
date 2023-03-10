@@ -3,15 +3,13 @@ import random
 import streamlit as st
 import pandas as pd
 import pickle
+import os 
 
+print('current directory', os.getcwd())
 
 m3u_filepaths_file = 'playlists/streamlit.m3u8'
 path = 'data/data.jsonl.pickle'
-ESSENTIA_ANALYSIS_PATH = 'data/files_essentia_effnet-discogs.jsonl.pickle'
-
-
-def load_essentia_analysis():
-    return pandas.read_pickle(path)
+#ESSENTIA_ANALYSIS_PATH = 'data/files_essentia_effnet-discogs.jsonl.pickle'
 
 # Leer archivo .pickle
 with open(path, 'rb') as f:
@@ -36,15 +34,7 @@ st.write(f'Using analysis data from `{path}`.')
 st.write('Loaded audio analysis for', len(df), 'tracks.')
 
 style_select = st.multiselect('Select by style activations:', audio_analysis_styles)
-st.write(style_select[0])
-#if style_select:
-    # Show the distribution of activation values for the selected styles.
-    #st.write(audio_analysis[style_select].describe())
-
-    #style_select_str = ', '.join(style_select)
-    #style_select_range = st.slider(f'Select tracks with', `{style_select_str}`)
-    #style_select_str = ", ".join([f"'{style}'" for style in styles])
-    #style_select_range = st.slider(f'Select tracks with {style_select_str}', 1, len(styles), (1, len(styles)))
+#st.write(style_select[0])
 
 if style_select:
     st.write('Audio with the following style(s):', style_select)
@@ -67,7 +57,7 @@ st.write('## 🩰 Danceability')
 danceability = st.slider('Choose how danceable you want the song to be:', 0, 3, (0,3))
 st.write("Danceability value is...💃🏽", danceability)
 
-st.write('## 🤨🤩 Arousal and valence')
+st.write('## 🤨 Arousal and valence')
 arousal = st.slider('Choose the arousal:', 1,9, (1,9))
 st.write("🐢 Arousal value is...", arousal)
 valence = st.slider('Choose the valence:', 1,9, (1,9))
@@ -103,18 +93,12 @@ if st.button("RUN"):
         styles = []
         for style in style_select:
             styles.append(style)
-        st.write('This is styles : ',styles)
+        #st.write('This is styles : ',styles)
         audio_analysis_query = audio_analysis.loc[audio_analysis["Music style"].isin(style_select)]
-        #for style in style_select:
-        #    fig, ax = plt.subplots()
-        #    ax.hist(audio_analysis_query[style], bins=100)
-        #    st.pyplot(fig)
+
 
         result = audio_analysis_query
         st.write('Results:',result)
-        #for style in style_select:
-            #result = result.loc[result[style] >= style_select_range[0]]
-        #st.write(result)
         mp3s = result.index
 
     if max_tracks:
@@ -124,32 +108,32 @@ if st.button("RUN"):
     if shuffle:
         mp3s_list = mp3s.tolist()
         random.shuffle(mp3s_list)
-        mp3s = pd.Index(mp3s_list)
+        #mp3s = pd.Index(mp3s_list)
 
         #random.shuffle(mp3s)
         st.write('Applied random shuffle.')
      
-    
+
     tune_names = df.iloc[mp3s]['Filename']
-    #tune_names_local = os.path.join(*os.path.split(tune_names)[-4:])
-    
-    #parts = tune_names.split('/')
-    #last_four_parts = parts[-4:]
-    #tune_names_local = os.path.join(*last_four_parts)
     tune_names_local=[]
     for filepath in tune_names:
       partes = filepath.split("/")
-      parte_final = "/".join(partes[-4:])
+      parte_final = "/".join(partes[-3:])
       tune_names_local.append(parte_final)
+  
     
     # Store the M3U8 playlist.
     with open(m3u_filepaths_file, 'w') as f:
         # Modify relative mp3 paths to make them accessible from the playlist folder.
-        mp3_paths = [os.path.join('..', mp3) for mp3 in tune_names_local]
-        f.write('\n'.join(mp3_paths))
+        #mp3_paths = [os.path.join('/Users/maria/Desktop/master/AMPLab2/audio_chunks/', mp3) for mp3 in tune_names_local]
+        mp3_paths = [mp3 for mp3 in tune_names_local]
+        f.write('\n'.join(tune_names_local))
         st.write(f'Stored M3U playlist (local filepaths) to `{m3u_filepaths_file}`.')
 
+    print('m3u_filepaths_file', m3u_filepaths_file)
+        
+
     st.write('Audio previews for the first 10 results:')
-    for mp3 in tune_names_local[:10]:
+    for mp3 in mp3_paths[:10]:
         st.audio(mp3, format="audio/mp3", start_time=0)
 
